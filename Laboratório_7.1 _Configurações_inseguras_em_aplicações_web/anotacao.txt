@@ -1,0 +1,96 @@
+sudo docker pull blabla1337/owasp-skf-lab:jwt-secret
+
+sudo docker run -ti -p localhost:5000:5000 blabla1337/owasp-skf-lab:jwt-secret
+ 
+
+Introdução à Configuração Incorreta de Segurança
+
+Esta disciplina explora as diversas dimensões da má configuração de segurança, suas causas e consequências. Por meio de exemplos práticos, destacaremos a importância de configurar corretamente as definições de segurança em aplicações de software, componentes de infraestrutura e sistemas relacionados
+
+Utilizando o recurso de introspecção do GraphQL, descubra o usuário que possui os privilégios "isAdmin".
+
+O GraphQL não oferece autenticação integrada por padrão, deixando a responsabilidade da implementação para os desenvolvedores.
+
+Reconhecimento: Assim que acessamos http://0.0.0.0:5000, vemos as poucas postagens publicadas por 2 usuários.
+ Exploração: Queremos usar o recurso de introspecção (habilitado) neste caso para entender melhor quais consultas são suportadas. 
+
+ Vamos usar a LUI GraphQL para enviar consultas ao backend e descobrir o que está disponível. 
+
+{script}
+
+O aplicativo nos fornece tipos interessantes.
+Vamos explorar o objeto UserObject. Se criarmos uma consulta mais complexa, podemos solicitar mais informações, explorando todos os campos disponíveis. Vamos enviar o seguinte:
+
+{script}
+
+Neste caso, para cada campo, queremos saber quais são os subcampos e de que tipo. O aplicativo responderá com
+
+[saida]
+
+Podemos ver que existe um campo interessante, o "Admin", que podemos usar para descobrir quem é o administrador do aplicativo. 
+Agora, precisamos apenas consultar todos os usuários.
+Para isso, vamos verificar se existe uma consulta disponível. Podemos usar a seguinte sintaxe:
+
+{script}
+
+Isso nos dará a consulta allUsers. Agora precisamos entender quais são os campos. Podemos fazer isso de diferentes maneiras, usando GraphiQL ou fazendo uma análise mais aprofundada. Neste caso, usamos GraphiQL, enviando a seguinte consulta:
+
+{script}
+
+Correção: Implemente a autorização no GraphQL Endpoint.
+Embora usuários autenticados possam consultar as informações,
+você não deve mapear informações sensíveis para o tipo definido no esquema.
+
+
+Configurações inseguras em aplicações web podem representar uma ameaça significativa à segurança, pois podem deixar a aplicação vulnerável a diversos ataques.
+
+
+Por que configurações inseguras são importantes
+
+Configurações inseguras podem levar a diversos problemas de segurança, tais como:
+
+Exposição de Dados Sensíveis:
+
+Acesso não autorizado:
+
+Sequestro de sessão:
+
+	Configurações inseguras comuns:
+
+	Credenciais padrão ou fracas para interfaces administrativas
+	Cabeçalhos de segurança e cookies mal configurados
+	Software e bibliotecas desatualizados ou vulneráveis
+	Armazenamento inseguro de dados sensíveis (por exemplo, senhas em texto simples ou chaves de API)
+
+
+Reconhecimento
+
+Step 1: O aplicativo exibe um menu suspenso a partir do qual podemos escolher uma introdução ou capítulos para serem exibidos no lado do cliente. A primeira coisa que precisamos fazer é investigar mais a fundo as solicitações que estão sendo feitas. 
+
+Fazemos isso configurando nosso proxy interceptador para que possamos obter uma melhor compreensão do aplicativo em teste. Depois de configurarmos nosso proxy interceptador preferido, vamos analisar o tráfego entre o servidor e o front-end.
+
+
+
+Após configurarmos nosso proxy interceptador favorito, vamos analisar o tráfego entre o servidor e o front-end. 
+
+Clique em Autenticar. A primeira coisa a notar é que, após o login bem-sucedido, a resposta contém um token de acesso.
+
+Como mostrado na imagem acima, existem dois pontos que podem ser tratados. O cabeçalho do algoritmo contém informações sobre qual algoritmo está sendo usado para a assinatura digital do token. 
+
+A identidade é uma informação usada pelo aplicativo para identificar qual ID de usuário está autenticado no momento.
+
+Que tal verificar se o servidor usou uma chave secreta fraca para o algoritmo de assinatura digital? 
+
+Analisando o código abaixo, é possível ver que uma chave secreta fraca está sendo usada, a qual pode ser facilmente descoberta por meio de um ataque de adivinhação usando ferramentas disponíveis na internet e em sua distribuição de teste de penetração favorita.
+
+Usando a chave secreta fraca, vamos alterar o valor da identidade.
+
+1️⃣ Pega o token
+2️⃣ Descobre que usa HS256
+3️⃣ Testa brute force
+4️⃣ Descobre SECRET_KEY = "secret"
+5️⃣ Cria novo payload:
+6️⃣ Assina com "secret"
+7️⃣ Acesso como admin
+									
+

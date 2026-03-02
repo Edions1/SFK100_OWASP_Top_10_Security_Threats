@@ -1,0 +1,50 @@
+sudo docker pull blabla1337/owasp-skf-lab:ldap-injection
+
+
+
+sudo docker run -ti -p 127.0.0.1:5000:5000 blabla1337/owasp-skf-lab:ldap-injection
+
+
+											Introdução à Injeção LDAP
+
+
+
+A injeção de LDAP pode ter sérias implicações de segurança para aplicações web:
+
+	Burla de autenticação:
+
+	Divulgação de informações:
+
+	Ataques de injeção de dados
+
+	Ataques de negação de serviço (DoS) 
+
+
+	A injeção de LDAP por reconhecimento é um ataque usado para explorar aplicações web que constroem declarações LDAP com base na entrada do usuário. Quando uma aplicação falha ao sanitizar corretamente a entrada do usuário, é possível modificar as declarações LDAP usando um proxy local. Isso pode resultar na execução de comandos arbitrários, como conceder permissões a consultas não autorizadas e modificar o conteúdo dentro da árvore LDAP. As mesmas técnicas avançadas de exploração disponíveis na injeção de SQL podem ser aplicadas de forma semelhante na injeção de LDAP.
+
+
+	Tentando fazer login com nome de usuário e senha aleatórios
+
+
+
+A arquitetura de aplicação que suporta LDAP inclui componentes tanto do lado do servidor quanto do lado do cliente.
+As consultas LDAP enviadas ao servidor são conhecidas como filtros de pesquisa LDAP, que são construídos usando notação de prefixo. 
+Abaixo está um exemplo de um filtro de pesquisa LDAP.
+
+find("(&(cn="+username+")(userPassword="+pass+"))")
+
+	Essa notação de filtro de prefixo instrui a consulta a encontrar um nó LDAP com o nome de usuário e a senha fornecidos.
+
+
+Exploração:
+
+Vamos verificar o arquivo ldap-injection.py
+	search_filter="(&(cn="+username+")(sn="+password+"))"
+
+
+Podemos ver que o filtro é construído concatenando o nome de usuário e a senha diretamente no filtro, sem a devida sanitização. Se substituirmos o nome de	usuário e a senha por um caractere especial, podemos burlar os controles de autenticação. Usar * como nome de usuário e senha resultará em um login bem-sucedido.
+
+search_filter="(&(cn="*")(sn="*"))";
+
+
+

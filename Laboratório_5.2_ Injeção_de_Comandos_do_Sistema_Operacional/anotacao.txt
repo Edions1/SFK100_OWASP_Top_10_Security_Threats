@@ -1,0 +1,38 @@
+sudo docker pull blabla1337/owasp-skf-lab:cmd
+
+sudo docker run -ti -p 127.0.0.1:5000:5000 blabla1337/owasp-skf-lab:cmd
+
+
+ 
+															Injeção de Comandos do Sistema Operacional
+
+	Problemas de segurança em aplicações web:
+
+	Falta de validação e higienização de entrada:
+
+	Práticas de programação inseguras:
+		
+	Privilégios excessivos:
+
+
+
+Reconhecimento: A injeção de comandos é um ataque cujo objetivo é a execução de comandos arbitrários no sistema operacional do host por meio de um aplicativo vulnerável. Ataques de injeção de comandos são possíveis quando um aplicativo passa dados não seguros fornecidos pelo usuário (formulários, cookies, cabeçalhos HTTP etc.) para um shell do sistema. Inicialmente, o atacante precisa inspecionar o funcionamento do aplicativo web para encontrar possíveis pontos de injeção. Ao iniciar o aplicativo, podemos ver que há uma imagem e a opção de redimensioná-la.
+
+
+Agora, vamos selecionar um valor e pressionar o botão.
+
+
+Se inspecionarmos a requisição com um proxy interceptador (estamos usando o Burp), podemos ver que o aplicativo está realizando uma requisição POST para /home. Na requisição, enviamos o número (em porcentagem) para redimensionar a imagem. Na resposta, podemos verificar se a imagem foi redimensionada.
+
+
+
+Exploração: 
+Neste laboratório, tentaremos escrever no código-fonte a saída de um comando executado no sistema. Primeiro, verificaremos o código-fonte.
+
+
+Agora, enviamos uma nova requisição HTTP tentando escrever a saída do comando whoami (supondo que ele será executado no sistema alvo) no final do código index.html (view do site principal)
+
+;echo 'whoami' >> templates/index.html;
+
+Agora acessamos o código-fonte do site para verificar se a saída do comando `whoami` ("root") foi anexada ao final do código-fonte. Como podemos ver, a saída do comando `whoami` mostra os privilégios do usuário alvo no sistema alvo e que o aplicativo web é vulnerável à injeção de comandos do sistema operacional.
+

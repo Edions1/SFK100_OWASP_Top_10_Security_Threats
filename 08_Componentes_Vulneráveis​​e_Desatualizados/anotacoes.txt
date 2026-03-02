@@ -1,0 +1,69 @@
+CycloneDX:
+Ela lista os componentes, bibliotecas, módulos e outros recursos, juntamente com os números de versão relevantes e outros metadados úteis.
+
+OWASP Dependency-Track:
+é uma plataforma inteligente de Análise de Composição de Software (SCA)
+ 
+docker run -d -p 127.0.0.1:8080:8080 --name dependency-track owasp/dependency-track
+
+
+PASSO 1 — Criar projeto dentro do container
+    podman exec -it dependency-track /bin/sh
+
+    
+
+PASSO 2 — Adicionar dependências vulneráveis (de propósito)
+
+
+PASSO 3 — Instalar CycloneDX
+
+
+PASSO 4 — Gerar o BOM
+
+
+ASSO 5 — Subir no OWASP Dependency Track
+
+PASSO 6 — O que você deve ver depois
+    Vulnerabilities
+
+    CVEs
+
+    Severidade
+
+    CVSS Score
+    
+    
+    
+    
+ 															 Componentes Vulneráveis​​e Desatualizados
+
+Você provavelmente está vulnerável:
+
+Se você não souber as versões de todos os componentes que utiliza (tanto do lado do cliente quanto do servidor), incluindo componentes que você usa diretamente, bem como dependências aninhadas,
+
+Se o software for vulnerável, não tiver suporte ou estiver desatualizado. 
+
+Se você não realiza varreduras regulares em busca de vulnerabilidades e não se inscreve em boletins de segurança relacionados aos componentes que utiliza.
+
+Se você não corrigir ou atualizar a plataforma subjacente, as estruturas e as dependências de forma oportuna e com base na avaliação de riscos, poderá sofrer consequências graves. 
+
+Se os desenvolvedores de software não testarem a compatibilidade de bibliotecas atualizadas, aprimoradas ou corrigidas.
+
+
+CycloneDX é uma especificação de lista de materiais de software (SBOM) leve, que pode ser facilmente criada, comparada, rastreada e usada para gerenciamento de componentes, aplicativos, contêineres e sistemas.
+
+Ela lista os componentes, bibliotecas, módulos e outros recursos, juntamente com os números de versão relevantes e outros metadados úteis.
+
+OWASP Dependency-Track:
+ é uma plataforma inteligente de Análise de Composição de Software (SCA) que permite às organizações identificar e reduzir riscos na cadeia de suprimentos de software. O Dependency-Track aproveita os recursos da Lista de Materiais de Software (SBOM), permitindo que as organizações identifiquem riscos inerentes e tomem medidas proativas para reduzi-los no ciclo de vida de desenvolvimento de aplicativos.
+
+Importando resultados para o OWASP Dependency-Track
+	1. Utilizando a API
+	O Dependency-Track fornece uma API RESTful que pode ser usada para automatizar o envio de resultados de varredura. Normalmente, isso envolve o envio de uma solicitação POST para o endpoint /api/v1/bom, incluindo os resultados da varredura no corpo da solicitação.
+	
+	Por exemplo, se você estiver usando uma ferramenta como o OWASP Dependency-Check, você faria o seguinte:
+	
+	Execute a verificação de dependências e gere um relatório no formato CycloneDX.
+	Envie uma solicitação POST para Dependency-Track com a lista de materiais (BOM) do CycloneDX gerada.
+
+	

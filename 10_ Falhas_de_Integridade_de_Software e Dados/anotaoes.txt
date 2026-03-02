@@ -1,0 +1,108 @@
+sudo docker pull blabla1337/owasp-skf-lab:des-pickle
+
+sudo docker run-ti-p 127.0.0.1: 5000:5000 blabla1337/owasp-skf-lab:des-pickle
+
+
+
+
+  														 Falhas de Integridade de Software e Dados
+
+
+Falhas de integridade de software e dados estão relacionadas a código e infraestrutura que não protegem contra violações de integridade.
+
+	 Um exemplo disso é quando um aplicativo depende de plugins, bibliotecas ou módulos de fontes, repositórios e redes de distribuição de conteúdo (CDNs) não confiáveis. Um pipeline de CI/CD inseguro pode introduzir a possibilidade de acesso não autorizado, código malicioso ou comprometimento do sistema.
+
+
+Cenário nº 1
+Atualização sem assinatura: Muitos roteadores domésticos, decodificadores, firmware de dispositivos e outros não verificam as atualizações por meio de firmware assinado. F
+
+
+Cenário nº 2
+: Atualização maliciosa da SolarWinds: Sabe-se que estados-nação atacam mecanismos de atualização, sendo um exemplo recente e notório o ataque ao SolarWinds Orion.
+
+Cenário #3
+Desserialização Insegura: Uma aplicação React chama um conjunto de microsserviços Spring Boot. Sendo programadores funcionais, eles tentaram garantir que seu código fosse imutável.
+
+
+A desserialização insegura de objetos é uma vulnerabilidade que ocorre quando um aplicativo não valida ou higieniza corretamente a entrada antes de tentar "desserializá-la". A desserialização é o processo de converter dados estruturados de um formato (como JSON, XML, etc.) de volta para um objeto na memória de um programa.
+
+		// Uma serialização/desserialização simples de objetos Java
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("objectFile"));
+		objectOutputStream.writeObject(myObject); // Isso é serialização
+		objectOutputStream.close();
+		
+		ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("objectFile"));
+		MyClass myObject = (MyClass) objectInputStream.readObject(); // Isso é a desserialização
+		objectInputStream.close();s
+
+Como isso pode ser um problema de segurança
+
+Execução Remota de Código (RCE):
+Se um atacante puder modificar os dados serializados para incluir código malicioso, e o aplicativo não validar ou higienizar esses dados antes de desserializá-los, o código do atacante poderá ser executado.
+
+Negação de serviço (DoS):
+Dados serializados maliciosos também podem causar a falha do aplicativo, resultando em uma negação de serviço.
+Ataques de injeção:
+
+A desserialização insegura pode levar a vários ataques de injeção, incluindo, entre outros, injeção de SQL, injeção de NoSQL, injeção de comandos do sistema operacional, etc
+termos tecnicos:
+	Forçar delay (sleep)
+	
+	Criar arquivo
+	
+	Fazer ping externo
+
+
+ Redes de Distribuição de Conteúdo (CDNs) :
+
+ são uma parte fundamental da infraestrutura web moderna, projetadas para entregar conteúdo web aos usuários de forma eficiente.
+ A principal função de uma CDN é fornecer conteúdo aos usuários com alta disponibilidade e alto desempenho.
+
+ Possíveis problemas de segurança
+ 	Integridade de dados:
+ 	Privacidade:
+ 	Disponibilidade:
+
+ 	Portanto, é crucial usar apenas CDNs e fontes de dados confiáveis ​​ao desenvolver aplicações web.
+
+
+ Explore uma vulnerabilidade de XSS auto-experimental na aplicação, utilizando uma fonte não confiável para carregar JavaScript malicioso.
+
+ Passo 1:
+
+  Ao incluir funcionalidades de terceiros, como widgets da web, bibliotecas ou outras fontes de funcionalidade, o software deve confiar efetivamente nessas funcionalidades. Sem mecanismos de proteção suficientes, a funcionalidade pode ser maliciosa (seja por vir de uma fonte não confiável, ser falsificada ou ser modificada durante a transmissão de uma fonte confiável). 
+
+  A funcionalidade também pode conter suas próprias fragilidades, como acesso irrestrito a funcionalidades adicionais e informações de estado que deveriam ser mantidas privadas ao sistema base, tais como informações de estado do sistema, dados sensíveis da aplicação ou o DOM de uma aplicação web.
+
+  Isso pode levar a diversas consequências, dependendo da funcionalidade incluída, mas alguns exemplos incluem injeção de malware, exposição de informações ao conceder privilégios ou permissões excessivas à funcionalidade não confiável, vulnerabilidades XSS baseadas em DOM, roubo de cookies do usuário ou redirecionamento aberto para malware.
+
+
+																			Falhas no registro e monitoramento de segurança
+
+
+
+O registro e monitoramento de segurança são aspectos cruciais para a manutenção de um ambiente de aplicações web robusto e seguro.
+
+Compreenda os conceitos de registro e monitoramento de segurança 
+
+Entenda que o registro de segurança envolve o registro e o armazenamento de ações e eventos dentro de um sistema, incluindo atividades do usuário, erros do sistema e transações, fornecendo um registro rastreável dessas atividades.
+
+registro de segurança:
+
+O registro de segurança é o processo de registrar e armazenar ações e eventos dentro de um sistema. Isso pode incluir atividades do usuário, erros do sistema, transações e muito mais. Os registros fornecem um histórico rastreável dessas atividades e podem ser analisados ​​para descobrir padrões ou identificar comportamentos suspeitos.
+
+# Exemplo de entrada de log:
+[2023-06-09 10:15:32] - IP: 192.0.2.1 - Usuário: exampleUser - Ação: Login - Status: Sucesso
+
+
+importância do registro de segurança
+	Eventos auditáveis ​​ausentes
+
+
+Os Perigos do Armazenamento Local:
+
+	Adulteração de dados:
+	Perda de dados:
+	Acesso limitado:
+
+O registro de segurança não se resume apenas à coleta de dados, mas sim à coleta dos dados corretos e à atuação oportuna sobre eles. À medida que as ameaças cibernéticas evoluem, nossa abordagem ao registro também deve evoluir. Não se trata apenas de uma exigência de conformidade, mas de um elemento crucial em uma estratégia robusta de cibersegurança.

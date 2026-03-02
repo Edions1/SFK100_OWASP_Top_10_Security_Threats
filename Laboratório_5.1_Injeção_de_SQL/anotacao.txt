@@ -1,0 +1,107 @@
+
+sudo docker pull blabla1337/owasp-skf-lab:sqli
+
+sudo docker run -ti -p 0.0.0.0:5000:5000 blabla1337/owasp-skf-lab:sqli
+
+
+Como a injeção de SQL pode ser um problema de segurança:
+
+Acesso não autorizado:
+
+Divulgação de dados:
+
+A manipulação de dados:
+
+Execução Remota de Código:
+
+Etapa de Reconhecimento 1:
+O primeiro passo é identificar os parâmetros que podem ser potencialmente usados ​em uma consulta SQL para se comunicar com o banco de dados subjacente.
+ Neste exemplo, descobrimos que o método "/home"
+
+
+ Step 2
+
+ Agora vamos ver se conseguimos criar um erro injetando uma aspa simples.
+
+http://127.0.0.1:5000/home/1'
+
+[retorno da pagina: erro com dados sqlite3]
+
+
+Ao fazer isso, a sintaxe da consulta SQL fica incorreta. Isso ocorre porque a entrada fornecida pelo usuário está sendo concatenada diretamente na consulta SQL.
+
+
+Agora também podemos usar operadores lógicos para determinar se podemos realmente manipular as instruções SQL. Começamos com um operador lógico que é falso (e 1 = 2). O comportamento esperado ao injetar um operador lógico falso seria um erro.
+
+
+http://127.0.0.1:5000/home/1and1=2
+
+Exploração: Agora que sabemos que o aplicativo é vulnerável a injeções de SQL, vamos explorar essa vulnerabilidade para ler informações confidenciais do banco de dados. Esse processo poderia ser automatizado com ferramentas como o SQLMAP.
+
+No entanto, para este exemplo, vamos tentar explorar a injeção de SQL manualmente.
+
+Step 1
+
+O operador UNION é usado em injeções SQL para unir uma consulta, propositalmente forjada, à consulta original. Isso permite obter os valores das colunas de outras tabelas. Primeiro, precisamos determinar o número de colunas usadas pela consulta original. Podemos fazer isso por tentativa e erro.
+
+
+http://127.0.0.1:5000/home/1 union select 1
+
+
+Essa consulta resulta em um erro, devido ao fato de a consulta original ter começado com 3 colunas: *pageId*, *title* e *content*.
+
+
+http://127.0.0.1:5000/home/1 union select 1,2,3
+
+Observe como "título" e "conteúdo" se tornaram marcadores para os dados que queremos recuperar do banco de dados.
+
+Step 2
+
+Agora que determinamos o número de colunas necessárias, podemos fazer uma estimativa fundamentada para a tabela da qual queremos extrair informações confidenciais. Novamente, podemos ver que, se tentarmos acessar uma tabela inexistente, receberemos um erro. Para uma tabela correta, vemos o aplicativo funcionar conforme o esperado.
+
+	http://127.0.0.1:5000/home/1 union select 1,2,3 from user
+
+Esse passo NÃO é para extrair dados ainda.
+
+É para:
+
+✅ Confirmar que a tabela user existe
+✅ Confirmar que o UNION está funcionando
+✅ Confirmar que temos 3 colunas
+
+
+http://127.0.0.1:5000/home/1 union select 1,username,password from users
+
+Quando você envia:
+	1 union select 1,username,password from users
+
+	A query final vira:
+	
+	SELECT pageId, title, content 
+	FROM pages 
+	WHERE pageId=1
+	
+	UNION
+	
+	SELECT 1, username, password FROM users
+
+	Para cada usuário na tabela users, o banco retorna:
+
+	1 | username | password
+	
+Mitigação: 
+A injeção de SQL pode ser evitada seguindo os métodos descritos abaixo: Defesas Primárias: Primeiro passo: Validação de entrada com lista branca Segundo passo: Uso de instruções preparadas (consultas parametrizadas) Defesas Adicionais: Também: Imposição do princípio do menor privilégio Também: Realização de validação de entrada com lista de permissões como defesa secundária Neste caso, apresentamos uma correção de SQLicode usando consultas parametrizadas (também conhecidas como instruções preparadas) em vez de concatenação de strings dentro da consulta.
+
+
+O código a seguir é vulnerável a injeção de SQL, pois a entrada do usuário é concatenada diretamente na consulta sem qualquer forma de validação: PATH:/SQLI/models/sqlimodel.py
+
+cur=db.execute('SELECTpageId,title,contentFROMpagesWHEREpageId='+pageId)
+
+Este código pode ser facilmente reescrito de forma a impedir que a entrada do usuário interfira na estrutura da consulta.
+
+cur=db.execute('SELECTpageId,title,contentFROMpagesWHEREpageId=?',(pageId,))
+
+Relexão:
+Isso tecnicamente é um erro do sql em si ou um erro do arquivo tipo python,php etc.. que consulta o banco ?
+	R= É erro de como a aplicação (Python, PHP, etc.) constrói a consulta.
+

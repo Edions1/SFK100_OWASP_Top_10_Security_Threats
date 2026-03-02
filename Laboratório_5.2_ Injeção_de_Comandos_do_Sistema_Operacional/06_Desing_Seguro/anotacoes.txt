@@ -1,0 +1,61 @@
+Consulte o guia do laboratório e crie um diagrama de memória de resposta (RTM) da aplicação usando os diagramas de sequência. Ao concluir o laboratório, você pode verificar os "resultados" para comparar o seu resultado.
+	Desing Seguro
+
+Design inseguro é uma categoria ampla que representa diferentes fragilidades, expressas como "controles de projeto ausentes ou ineficazes". Design inseguro não é a origem de todas as outras categorias de risco do Top 10. Há uma diferença entre design inseguro e implementação insegura. Distinguimos entre falhas de projeto e defeitos de implementação por um motivo: eles têm causas raízes e soluções diferentes. Um design seguro ainda pode apresentar defeitos de implementação que levam a vulnerabilidades que podem ser exploradas.
+
+Um design inseguro não pode ser corrigido por uma implementação perfeita, pois, por definição, os controles de segurança necessários nunca foram criados para se defender contra ataques específicos. 
+
+Um dos fatores que contribuem para o design inseguro é a falta de perfil de risco de negócio inerente ao software ou sistema em desenvolvimento e, portanto, a falha em determinar qual nível de segurança de projeto é necessário.
+
+	* Design inseguro refere-se à implementação de aplicações web de forma a expô-las a potenciais ataques e vulnerabilidades.
+
+A modelagem de ameaças responde às seguintes quatro perguntas principais:
+
+	O que estamos construindo?
+	O que pode dar errado?
+	O que vamos fazer a respeito?
+	Fizemos um trabalho suficientemente bom?
+
+Existem quatro abordagens gerais para a modelagem de ameaças:
+	Abordagem centrada em ativos:
+	Abordagem centrada no sistema (ou centrada na arquitetura):
+	Abordagem centrada no atacante:
+	Abordagens centradas em
+
+Abordagens centradas em listas para modelagem de ameaças com ASVS
+
+As abordagens de modelagem de ameaças centradas em listas, usando ferramentas como o Application Security Verification Standard (ASVS) do Open Web Application Security Project (OWASP), fornecem uma lista de verificação sistemática e abrangente para avaliar a segurança de aplicativos de software.
+
+
+Benefícios da abordagem centrada em listas
+
+		Simplicidade e acessibilidade:
+		Listas de verificação de cobertura
+		Padronização e consistência:
+		As listas de verificação de facilidade de uso
+		As listas de verificação de documentação e rastreabilidade
+		
+Limitações da abordagem centrada em listas:
+
+No entanto, a abordagem baseada em listas de verificação apresenta algumas limitações. Ela pode ser menos eficaz para identificar ameaças complexas e espwcíficas ao contexto que não são contempladas pela lista.
+Também pode incentivar uma mentalidade de "cumprir requisitos", em que as equipes apenas visam atender aos itens da lista sem compreender os princípios desegurança subjacentes. 
+Portanto, é importante utilizar a abordagem centrada em listas como parte de um programa de segurança abrangente e baseado em riscos, e não como um substituto para a compreensão e o gerenciamento de riscos de segurança.
+
+
+RTM
+
+Uma matriz de rastreabilidade de requisitos (RTM, na sigla em inglês) é um documento que auxilia no rastreamento e monitoramento dos requisitos de um sistema ao longo de seu ciclo de desenvolvimento. Ela estabelece uma ligação clara entre os requisitos do sistema, suas origens e os componentes de projeto e implementação resultantes.
+
+Uma Matriz de Rastreabilidade de Requisitos (RTM) pode ser especialmente útil no contexto de segurança, pois ajuda a identificar potenciais vulnerabilidades ou casos de abuso, examinando as relações entre requisitos, componentes de design e métodos de teste. Ao criar e manter uma RTM ao longo do ciclo de desenvolvimento, você garante um sistema de software mais seguro e robusto.
+
+RTM (Requirements Traceability Matrix) é a ferramenta utilizada para documentar e organizar os resultados obtidos durante o processo de modelagem de ameaças, que inclui o uso de técnicas como o STRIDE.
+
+A relação entre eles funciona da seguinte forma:
+
+
+Identificação (STRIDE): O STRIDE é uma das técnicas sugeridas para responder à pergunta "O que pode dar errado?", ajudando a identificar ameaças e possíveis vulnerabilidades.
+
+Documentação e Mapeamento (RTM): O RTM é o documento onde você registra esses achados. No contexto da modelagem de ameaças, ele serve para mapear as funcionalidades (casos de uso) às ameaças (casos de abuso) e às suas respectivas mitigações.
+
+Aplicação Prática: Após criar o RTM, as fontes indicam que ele deve ser usado para analisar o código e os diagramas do sistema para identificar quantas vulnerabilidades potenciais podem ser encontradas e verificar se as medidas de segurança estão sendo implementadas.
+

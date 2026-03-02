@@ -1,0 +1,33 @@
+Pegue este hash de senha e encontre o valor em texto simples: a332233d395c415a99c6b16a2348c129
+
+Utilize o texto simples gerado pelo hash na Questão 1 do questionário como resposta
+
+
+resolução:
+
+Passo 1 — Identificar o algoritmo
+
+/SKF100-OWASP]
+└──╼ #python3
+Python 3.13.5 (main, Jun 25 2025, 18:55:22) [GCC 14.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> len("a332233d395c415a99c6b16a2348c129")
+... 
+32
+
+Hashes com 32 caracteres hexadecimais normalmente são MD5.
+
+| Algoritmo | Tamanho |
+| --------- | ------- |
+| MD5       | 32      |
+| SHA1      | 40      |
+| SHA256    | 64      |
+
+
+##Script para converter saida simples e comparar hash:
+
+import hashlib
+
+texto = "Password01!"
+print(repr(texto))
+print(hashlib.md5(texto.encode()).hexdigest())

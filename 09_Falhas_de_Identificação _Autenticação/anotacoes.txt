@@ -1,0 +1,63 @@
+echo RGV2ZWxvcGVyIHVzZXJuYW1lOiBkZXZ0ZWFtCkNsaWVudDogUm9ja3lvdQ== | base64 -d
+Developer username: devteam
+
+
+RGV2ZWxvcGVyIHVzZXJuYW1lOiBkZXZ0ZWFtCkNsaWVudDogUm9ja3lvdQ==
+
+
+hydra -l devteam -P rockyou.txt f7f86de9-4f7c-4d27-907a-e5e69a54c003.pico.p.lf-labs.org https-po
+st-form "/:username=devteam&password=^PASS^:F=Invalid"
+
+
+sudo docker pull blabla1337/owasp-skf-lab:info-leakeage-comments
+
+sudo docker run -ti -p 127.0.0.1:5000:5000 blabla1337/owasp-skf-lab:info-leakeage-comments
+
+
+														Falhas de Identificação e Autenticação
+
+
+A identificação e a autenticação são componentes críticos da segurança de aplicações web.
+
+
+	Compreenda o papel e a importância da identificação e autenticação na segurança de aplicações web, bem como as consequências de suas falhas.
+	Identificar e reconhecer as vulnerabilidades comuns de autenticação e os ataques automatizados em aplicações web.
+
+		Identificação é o ato de afirmar uma identidade — normalmente por meio de um nome de usuário ou número de identificação em aplicativos da web.
+		 autenticação consiste em verificar essa identidade — geralmente por meio de uma senha, mas também pode envolver outros métodos, como tokens, biometria e certificados digitais.
+
+
+Use força bruta para invadir o aplicativo e obter acesso à conta da equipe de desenvolvimento .
+		 
+
+O aplicativo exibe uma tela de login de administrador, mas não temos as credenciais. Precisaremos fazer login de alguma forma para resolver o desafio, cujo nome é "Ratelimiting". Com isso, sabemos que precisamos usar força bruta para o login, mas qual seria o nome de usuário? Vamos investigar mais a fundo. Ao analisar o código-fonte, encontramos uma mensagem em base64 comentada.
+
+
+Vamos descriptografar a string codificada em base64 usando terminais, como mostrado na imagem abaixo:
+
+
+</div><!-- /.row -->
+
+						<!-- dev metadata: RGV2ZWxvcGVyIHVzZXJuYW1lOiBkZXZ0ZWFtCkNsaWVudDogUm9ja3lvdQ== -->
+
+						  
+
+					</div>
+		 
+Exploração: Pelo que parece, o desenvolvedor tem uma conta com o nome de usuário devteam, então provavelmente precisamos usar força bruta para invadir essa conta. 
+
+
+
+A partir disso, parece que o desenvolvedor tem uma conta com o nome de usuário "devteam", então provavelmente precisamos usar força bruta para invadir essa conta
+
+Então, teremos que usar força bruta no formulário de login, que é baseado em POST, utilizando alguma ferramenta.
+
+
+  o Hydra e o Intruder do Burp Suite para isso. Neste artigo, demonstrarei como fazer isso usando o Hydra. Força bruta usando Hydra
+
+  Após lançar um ataque de força bruta contra a função de login, depois de alguns minutos, você obterá a senha, como na captura de tela abaixo. 
+
+
+
+
+		

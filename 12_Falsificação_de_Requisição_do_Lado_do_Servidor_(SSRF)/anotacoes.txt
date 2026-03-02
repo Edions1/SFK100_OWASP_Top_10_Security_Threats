@@ -1,0 +1,57 @@
+sudo docker pull blabla1337/owasp-skf-lab:ssrf
+
+sudo docker run -ti -p 127.0.0.1:5000:5000 blabla1337/owasp-skf-lab:ssrf
+
+
+ Falsificação de Requisição do Lado do Servidor (SSRF)
+
+Um ataque de reconhecimento de falsificação de solicitação do lado do servidor (SSRF, na sigla em inglês), no qual um invasor abusa da funcionalidade de um aplicativo web vulnerável para enviar solicitações fraudulentas que leem ou atualizam recursos internos. O invasor pode atacar uma rede interna ou um aplicativo atrás do firewall com esse ataque, que normalmente não é acessível por meio de uma rede externa, e até mesmo atacar aplicativos web da rede interna.
+
+
+Um ataque SSRFattack pode ser usado para fazer requisições a outros recursos internos para acessar metadados e uma porta na rede interna. Esquemas de URL como file:// podem ser usados ​​para ler o arquivo do servidor. 
+
+Os atacantes podem usar esquemas de URL legados como dict, gopher, expect, etc., que podem até causar a execução remota de código. Primeiro, vamos ver que tipo de serviços estão abertos no servidor que tentaremos atacar.
+
+nmap-v -sT -sV -p --P0 ip_of_lab_here
+
+Gibson:skf-labsgibson
+
+$nmap-vvvv-sT-sV-P0127.0.0.1
+
+Assim que confirmamos que a única porta aberta é a 5000, vamos dar uma olhada no aplicativo.
+
+ Aqui temos uma funcionalidade de verificação de sites ativos, onde podemos verificar se diferentes sites estão online e funcionando corretamente.
+
+A funcionalidade keepalive foi concebida para ser usada com sites externos, mas podemos utilizá-la também para verificar endereços IP internos e enumerar serviços. Vamos tentar uma porta conhecida, como por exemplo, 3306a (serviço MySQL). Talvez este serviço esteja em execução no servidor.
+
+
+Resumo do curso
+Controle de acesso quebrado
+Neste módulo, exploramos o risco de falhas no controle de acesso, que surge quando as restrições a usuários autenticados são aplicadas de forma inadequada. Os atacantes podem explorar essas vulnerabilidades para acessar funcionalidades ou dados não autorizados. Vimos como a aplicação de medidas rigorosas de controle de acesso e o princípio do menor privilégio ajudam a mitigar esses riscos.
+
+Falhas criptográficas
+Esta seção apresentou o conceito de falhas criptográficas. Trata-se dos riscos associados ao uso indevido da criptografia, que frequentemente resultam na exposição de informações sensíveis. Nossos laboratórios práticos demonstraram a importância da implementação de práticas criptográficas seguras, como o uso de algoritmos criptográficos atualizados e a proteção de chaves criptográficas.
+
+Injeção
+Estudamos diversos ataques de injeção, como injeção de SQL, NoSQL, de sistema operacional e LDAP. Essas vulnerabilidades ocorrem quando dados não confiáveis ​​são enviados como parte de um comando ou consulta. Você viu em primeira mão o impacto de ataques de injeção bem-sucedidos e aprendeu como preveni-los usando validação de entrada, consultas parametrizadas e outras práticas de programação segura.
+
+Design inseguro
+Neste módulo, enfatizamos a importância dos princípios de design seguro no desenvolvimento de software. O risco de design inseguro destaca como falhas de projeto podem levar a vulnerabilidades de segurança em larga escala. Por meio de exemplos práticos, descobrimos como uma abordagem de "segurança por design" pode mitigar tais riscos.
+
+Configuração de segurança incorreta
+Neste trabalho, examinamos os potenciais perigos da configuração incorreta de segurança, que geralmente resulta de configurações padrão inseguras, configurações incompletas ou improvisadas, ou armazenamento em nuvem desprotegido. Nossos exercícios práticos demonstraram como detectar essas vulnerabilidades e a necessidade de um processo de reforço de segurança bem definido e repetível.
+
+Componentes vulneráveis ​​e desatualizados
+Esta parte do curso focou nos riscos representados pelo uso de componentes de software vulneráveis ​​e desatualizados. Praticamos a identificação, atualização e remoção desses componentes para minimizar a superfície de ataque.
+
+Falhas de identificação e autenticação
+Aprendemos sobre as ameaças decorrentes de estratégias falhas de identificação e autenticação, que podem permitir que invasores se passem por usuários ou burlem a autenticação. Exploramos técnicas para implementar autenticação multifator, políticas de senhas fortes e gerenciamento seguro de sessões para ajudar a combater essas ameaças.
+
+Falhas de integridade de software e dados
+Neste módulo, abordamos a importância de manter a integridade do software e dos dados. Você vivenciou como a falta de controles de integridade adequados pode levar à modificação não autorizada de dados ou à execução de código. Também examinamos medidas de segurança como checksums, assinaturas digitais e permissões de arquivo seguras.
+
+Falhas no registro e monitoramento de segurança
+Nesta discussão, abordamos a falta de registro e monitoramento adequados, o que pode atrasar ou impedir a detecção de violações de segurança. Observamos o valor de práticas de monitoramento abrangentes e proativas e aprendemos como implementar mecanismos de registro eficazes que capturem eventos importantes relacionados à segurança.
+
+Falsificação de solicitação do lado do servidor (SSRF)
+O curso concluiu com uma exploração do SSRF (Ataque de Requisição Servidor-Servidor), onde agentes maliciosos podem induzir o servidor a realizar requisições em seu nome. Discutimos várias técnicas para mitigar esse risco, como validar e higienizar todos os dados de entrada, utilizar listas de permissão de servidores aprovados e aplicar o princípio do menor privilégio.
